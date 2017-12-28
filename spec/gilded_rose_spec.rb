@@ -45,12 +45,16 @@ describe GildedRose do
   end
 
   describe 'Backstage Passes' do
-    subject(:update_quality) do
-      GildedRose.new([backstage_pass]).update_quality
+    let(:gilded_rose) { GildedRose.new([backstage_pass]) }
+    subject(:update_quality) { gilded_rose.update_quality }
+    let(:backstage_pass) { a_backstage_pass }
+
+    it 'reduces the number of days left to sell by 1' do
+      expect { update_quality }.to change { backstage_pass.sell_in }.by -1
     end
     
     context 'when it is not passed its sell by date' do
-      let(:backstage_pass) { a_backstage_pass }
+      let(:backstage_pass) { a_backstage_pass(sell_in: 30) }
       
       it 'increases in quality by 1' do
         expect { update_quality }.to change { backstage_pass.quality }.by 1
