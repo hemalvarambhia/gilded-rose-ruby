@@ -4,7 +4,7 @@ describe GildedRose do
   describe 'Aged Brie' do
     context 'when it is not passed its sell-by date' do
       it 'increases in quality by 1' do
-        aged_brie = aged_brie(sell_in: 25)
+        aged_brie = an_aged_brie(sell_in: 25)
         gilded_rose = GildedRose.new([aged_brie])
         
         expect { gilded_rose.update_quality }.to(
@@ -14,7 +14,7 @@ describe GildedRose do
 
       context 'and the quality is already 50' do
         it 'does not change in quality' do
-          aged_brie = aged_brie(quality: 50)
+          aged_brie = an_aged_brie(quality: 50)
           gilded_rose = GildedRose.new([aged_brie])
           
           expect { gilded_rose.update_quality }.not_to(
@@ -35,7 +35,7 @@ describe GildedRose do
 
   private
   
-  def aged_brie(sell_in: 25, quality: 11)
+  def an_aged_brie(sell_in: 25, quality: 11)
     Item.new('Aged Brie', sell_in, quality)
   end
 end
