@@ -84,6 +84,14 @@ describe GildedRose do
         end
       end
     end
+
+    context 'when there are 10 days until the concert' do
+      let(:backstage_pass) { a_backstage_pass(sell_in: 10) }
+      
+      it 'increases in quality by 2' do
+        expect { update_quality }.to change { backstage_pass.quality }.by 2
+      end
+    end
   end
 
   private
