@@ -116,6 +116,14 @@ describe GildedRose do
         end
       end
     end
+
+    context 'when it is the day of the concert' do
+      let(:backstage_pass) { a_backstage_pass(sell_in: 0) }
+
+      it 'has no quality' do
+        expect { update_quality }.to change { backstage_pass.quality }.to 0
+      end
+    end
   end
 
   private
