@@ -4,29 +4,24 @@ describe GildedRose do
   describe 'Aged Brie' do
     let(:aged_brie) { an_aged_brie }
     let(:gilded_rose) { GildedRose.new([aged_brie]) }
-    
+    subject(:update_quality) { gilded_rose.update_quality }
+
     it 'reduces the number of days left sell by 1' do
-      expect { gilded_rose.update_quality }.to(
-        change { aged_brie.sell_in }.by -1
-      )
+      expect { update_quality }.to change { aged_brie.sell_in }.by -1
     end
     
     context 'when it is not passed its sell-by date' do
       let(:aged_brie) { an_aged_brie(sell_in: 25) }
 
       it 'increases in quality by 1' do
-        expect { gilded_rose.update_quality }.to(
-          change { aged_brie.quality }.by 1
-        )
+        expect { update_quality }.to change { aged_brie.quality }.by 1
       end
 
       context 'and the quality is already 50' do
         let(:aged_brie) { an_aged_brie(quality: 50) }
         
         it 'does not change in quality' do
-          expect { gilded_rose.update_quality }.not_to(
-            change { aged_brie.quality }
-          )
+          expect { update_quality }.not_to change { aged_brie.quality }
         end
       end
     end
