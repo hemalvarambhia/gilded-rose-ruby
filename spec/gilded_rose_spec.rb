@@ -91,6 +91,14 @@ describe GildedRose do
       it 'increases in quality by 2' do
         expect { update_quality }.to change { backstage_pass.quality }.by 2
       end
+
+      context 'and it already has a quality of 50' do
+        let(:backstage_pass) { a_backstage_pass(sell_in: 10, quality: 50) }
+        
+        it 'does not change in quality' do
+          expect { update_quality }.not_to change { backstage_pass.quality }
+        end
+      end
     end
   end
 
