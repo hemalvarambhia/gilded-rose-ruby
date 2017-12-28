@@ -27,7 +27,11 @@ describe GildedRose do
     end
 
     context 'when it hits its sell-by date' do
-      it 'increases in quality by 2'
+      let(:aged_brie) { an_aged_brie(sell_in: 0) }
+      
+      it 'increases in quality by 2' do
+        expect { update_quality }.to change { aged_brie.quality }.by 2
+      end
     end
 
     context 'when it has passed its sell-by date' do
