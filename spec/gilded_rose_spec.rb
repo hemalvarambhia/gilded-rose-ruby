@@ -13,7 +13,14 @@ describe GildedRose do
       end
 
       context 'and the quality is already 50' do
-        it 'does not change in quality'
+        it 'does not change in quality' do
+          aged_brie = aged_brie(quality: 50)
+          gilded_rose = GildedRose.new([aged_brie])
+          
+          expect { gilded_rose.update_quality }.not_to(
+            change { aged_brie.quality }
+          )
+        end
       end
     end
 
@@ -28,7 +35,7 @@ describe GildedRose do
 
   private
   
-  def aged_brie(sell_in:, quality: 11)
+  def aged_brie(sell_in: 25, quality: 11)
     Item.new('Aged Brie', sell_in, quality)
   end
 end
