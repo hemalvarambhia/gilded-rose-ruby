@@ -2,8 +2,15 @@ require 'gilded_rose'
 
 describe GildedRose do
   describe 'Aged Brie' do
+    let(:aged_brie) { an_aged_brie }
     let(:gilded_rose) { GildedRose.new([aged_brie]) }
-
+    
+    it 'reduces the number of days left sell by 1' do
+      expect { gilded_rose.update_quality }.to(
+        change { aged_brie.sell_in }.by -1
+      )
+    end
+    
     context 'when it is not passed its sell-by date' do
       let(:aged_brie) { an_aged_brie(sell_in: 25) }
 
