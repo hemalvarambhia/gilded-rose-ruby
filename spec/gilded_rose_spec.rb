@@ -1,4 +1,4 @@
-require_relative File.join('..', 'lib', 'gilded_rose')
+require 'gilded_rose'
 
 describe GildedRose do
   describe 'Aged Brie' do
