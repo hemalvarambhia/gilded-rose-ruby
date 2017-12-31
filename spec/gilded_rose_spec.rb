@@ -120,7 +120,15 @@ describe GildedRose do
     context 'when it is the day of the concert' do
       let(:backstage_pass) { a_backstage_pass(sell_in: 0) }
 
-      it 'has no quality' do
+      it 'is worth nothing' do
+        expect { update_quality }.to change { backstage_pass.quality }.to 0
+      end
+    end
+
+    context 'when the concert has already finished' do
+      let(:backstage_pass) { a_backstage_pass(sell_in: -1) }
+      
+      it 'is worth nothing' do
         expect { update_quality }.to change { backstage_pass.quality }.to 0
       end
     end
