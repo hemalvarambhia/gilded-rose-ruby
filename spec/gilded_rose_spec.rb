@@ -134,6 +134,20 @@ describe GildedRose do
     end
   end
 
+  describe 'Sulfuras, Hand of Ragnaros' do
+    let(:sulfuras) { Item.new('Sulfuras, Hand of Ragnaros', 11, 80) }
+    let(:gilded_rose) { GildedRose.new([sulfuras]) }
+    subject(:update_quality) { gilded_rose.update_quality }
+
+    it 'is never sold' do
+      expect { update_quality }.not_to change { sulfuras.sell_in }.from 11
+    end
+
+    it 'never changes from a quality of 80' do
+      expect { update_quality }.not_to change { sulfuras.quality }.from 80
+    end
+  end
+
   private
   
   def an_aged_brie(sell_in: 25, quality: 11)
