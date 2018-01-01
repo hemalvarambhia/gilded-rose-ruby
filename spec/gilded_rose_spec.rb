@@ -42,6 +42,12 @@ describe GildedRose do
         expect { update_quality }.to change { aged_brie.quality }.by 2
       end
     end
+
+    private
+
+    def an_aged_brie(sell_in: 25, quality: 11)
+      Item.new('Aged Brie', sell_in, quality)
+    end
   end
 
   describe 'Backstage Passes' do
@@ -132,6 +138,12 @@ describe GildedRose do
         expect { update_quality }.to change { backstage_pass.quality }.to 0
       end
     end
+
+    private
+
+    def a_backstage_pass(sell_in: 25, quality: 25)
+      Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in, quality)
+    end
   end
 
   describe 'Sulfuras, Hand of Ragnaros' do
@@ -164,19 +176,11 @@ describe GildedRose do
         expect { update_quality }.to change { normal_item.quality }.by -1
       end
     end
-  end
 
-  private
+    private
 
-  def a_normal_item(sell_in: 30, quality: 25)
-    Item.new('Normal Item', sell_in, quality)
-  end
-  
-  def an_aged_brie(sell_in: 25, quality: 11)
-    Item.new('Aged Brie', sell_in, quality)
-  end
-
-  def a_backstage_pass(sell_in: 25, quality: 25)
-    Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in, quality)
+    def a_normal_item(sell_in: 30, quality: 25)
+      Item.new('Normal Item', sell_in, quality)
+    end
   end
 end
