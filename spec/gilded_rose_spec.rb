@@ -148,7 +148,24 @@ describe GildedRose do
     end
   end
 
+  describe 'Normal item' do
+    let(:gilded_rose) { GildedRose.new([normal_item]) }
+    subject(:update_quality) { gilded_rose.update_quality }
+    
+    context 'when it has not passed its sell-by date' do
+      let(:normal_item) { a_normal_item(sell_in: 25) }
+
+      it 'degrades in quality by 1' do
+        expect { update_quality }.to change { normal_item.quality }.by -1
+      end
+    end
+  end
+
   private
+
+  def a_normal_item(sell_in: 30, quality: 25)
+    Item.new('Normal Item', sell_in, quality)
+  end
   
   def an_aged_brie(sell_in: 25, quality: 11)
     Item.new('Aged Brie', sell_in, quality)
