@@ -175,6 +175,14 @@ describe GildedRose do
       it 'degrades in quality by 1' do
         expect { update_quality }.to change { normal_item.quality }.by -1
       end
+
+      context 'and the quality is already 0' do
+        let(:normal_item) { a_normal_item(quality: 0) }
+
+        it 'does not change that quality' do
+          expect { update_quality }.not_to change { normal_item.quality }.from 0
+        end
+      end
     end
 
     private
