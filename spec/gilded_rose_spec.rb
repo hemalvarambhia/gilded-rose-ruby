@@ -185,6 +185,14 @@ describe GildedRose do
       end
     end
 
+    context 'when it hits its sell-by date' do
+      let(:normal_item) { a_normal_item(sell_in: 0) }
+      
+      it 'degrades in quality twice as fast' do
+        expect { update_quality }.to change { normal_item.quality }.by -2
+      end
+    end
+
     private
 
     def a_normal_item(sell_in: 30, quality: 25)
