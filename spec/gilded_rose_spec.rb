@@ -191,6 +191,16 @@ describe GildedRose do
       it 'degrades in quality twice as fast' do
         expect { update_quality }.to change { normal_item.quality }.by -2
       end
+
+      context 'and the quality is already 0' do
+        let(:normal_item) { a_normal_item(sell_in: 0, quality: 0) }
+
+        it 'does not change in quality' do
+          expect { update_quality }.not_to(
+            change { normal_item.quality }.from 0
+          )
+        end
+      end
     end
 
     private
