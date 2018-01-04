@@ -21,7 +21,7 @@ describe GildedRose do
       context 'and the quality is already 50' do
         let(:aged_brie) { an_aged_brie(quality: 50) }
         
-        it 'does not change in quality' do
+        it 'does not increase in quality any further' do
           expect { update_quality }.not_to change { aged_brie.quality }
         end
       end
@@ -69,7 +69,7 @@ describe GildedRose do
       context 'and the quality is already 50' do
         let(:backstage_pass) { a_backstage_pass(quality: 50) }
         
-        it 'does not change in quality' do
+        it 'does not increase in quality any further' do
           expect { update_quality }.not_to change { backstage_pass.quality }
         end
       end
@@ -85,7 +85,7 @@ describe GildedRose do
       context 'and the quality is already 50' do
         let(:backstage_pass) { a_backstage_pass(sell_in: 11, quality: 50) }
         
-        it 'does not change in quality' do
+        it 'does not increase in quality any further' do
           expect { update_quality }.not_to change { backstage_pass.quality }
         end
       end
@@ -101,7 +101,7 @@ describe GildedRose do
       context 'and it already has a quality of 50' do
         let(:backstage_pass) { a_backstage_pass(sell_in: 10, quality: 50) }
         
-        it 'does not change in quality' do
+        it 'does not increase in quality any further' do
           expect { update_quality }.not_to change { backstage_pass.quality }
         end
       end
@@ -117,7 +117,7 @@ describe GildedRose do
       context 'and the quality is already 50' do
         let(:backstage_pass) { a_backstage_pass(sell_in: 5, quality: 50) }
         
-        it 'does not change in quality' do
+        it 'does not increase in quality any further' do
           expect { update_quality }.not_to change { backstage_pass.quality }
         end
       end
@@ -179,8 +179,8 @@ describe GildedRose do
       context 'and the quality is already 0' do
         let(:normal_item) { a_normal_item(quality: 0) }
 
-        it 'does not change that quality' do
-          expect { update_quality }.not_to change { normal_item.quality }.from 0
+        it 'does not decrease in quality any further' do
+          expect { update_quality }.not_to change { normal_item.quality }
         end
       end
     end
@@ -195,10 +195,8 @@ describe GildedRose do
       context 'and the quality is already 0' do
         let(:normal_item) { a_normal_item(sell_in: 0, quality: 0) }
 
-        it 'does not change in quality' do
-          expect { update_quality }.not_to(
-            change { normal_item.quality }.from 0
-          )
+        it 'does not decrease in quality any further' do
+          expect { update_quality }.not_to change { normal_item.quality }
         end
       end
     end
@@ -213,10 +211,8 @@ describe GildedRose do
       context 'and the quality is already 0' do
         let(:normal_item) { a_normal_item(sell_in: -3, quality: 0) }
 
-        it 'does not change in quality' do
-          expect { update_quality }.not_to(
-            change { normal_item.quality }.from 0
-          )
+        it 'does not decrease in quality any further' do
+          expect { update_quality }.not_to change { normal_item.quality }
         end
       end
     end
