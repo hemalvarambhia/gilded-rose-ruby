@@ -39,17 +39,16 @@ class GildedRose
   end
 
   def reduce_quality_of(item)
-    if item.quality > 0
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.quality = item.quality - 1
-      end
-    end
+    return if item.name == "Sulfuras, Hand of Ragnaros"
+    return if item.quality == 0
+
+    item.quality = item.quality - 1
   end
 
   def increase_quality_of(item)
-    if item.quality < 50
-      item.quality = item.quality + 1
-    end
+    return if item.quality == 50
+
+    item.quality = item.quality + 1
   end
 end
 
