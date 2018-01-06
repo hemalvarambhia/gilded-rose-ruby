@@ -8,26 +8,42 @@ class GildedRose
     @items.each do |item|
       case item.name
         when 'Sulfuras, Hand of Ragnaros'
-          # Do nothing
+          update_sulfuras(item)
         when 'Aged Brie'
-          item.sell_in -= 1
-          increase_quality_of(item)
-          increase_quality_of(item) if expired?(item)
+          update_aged_brie(item)
         when 'Backstage passes to a TAFKAL80ETC concert'
-          item.sell_in -= 1
-          increase_quality_of(item)
-          increase_quality_of(item) if item.sell_in < 11
-          increase_quality_of(item) if item.sell_in < 6
-          item.quality = 0 if expired?(item)
+          updated_backstage_pass(item)
         else
-          item.sell_in -= 1
-          reduce_quality_of(item)
-          reduce_quality_of(item) if expired?(item)
+          update_normal_item(item)
       end
     end
   end
 
   private
+
+  def update_sulfuras(item)
+    # Do nothing
+  end
+
+  def update_normal_item(item)
+    item.sell_in -= 1
+    reduce_quality_of(item)
+    reduce_quality_of(item) if expired?(item)
+  end
+
+  def updated_backstage_pass(item)
+    item.sell_in -= 1
+    increase_quality_of(item)
+    increase_quality_of(item) if item.sell_in < 11
+    increase_quality_of(item) if item.sell_in < 6
+    item.quality = 0 if expired?(item)
+  end
+
+  def update_aged_brie(item)
+    item.sell_in -= 1
+    increase_quality_of(item)
+    increase_quality_of(item) if expired?(item)
+  end
 
   def expired?(item)
     item.sell_in < 0
