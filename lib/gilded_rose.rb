@@ -21,12 +21,13 @@ class GildedRose
           reduce_quality_of(item)
       end
 
-      if item.name == "Aged Brie"
-        increase_quality_of(item) if expired?(item)
-      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        item.quality = 0 if expired?(item)
-      else
-        reduce_quality_of(item) if expired?(item)
+      case item.name
+        when 'Aged Brie'
+          increase_quality_of(item) if expired?(item)
+        when 'Backstage passes to a TAFKAL80ETC concert'
+          item.quality = 0 if expired?(item)
+        else
+          reduce_quality_of(item) if expired?(item)
       end
     end
   end
