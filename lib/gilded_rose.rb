@@ -8,15 +8,17 @@ class GildedRose
     @items.each do |item|
       next if item.name == "Sulfuras, Hand of Ragnaros"
       item.sell_in = item.sell_in - 1
-
-      if item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert"
-        increase_quality_of(item)
-        if item.name == "Backstage passes to a TAFKAL80ETC concert"
-          increase_quality_of(item) if item.sell_in < 11
-          increase_quality_of(item) if item.sell_in < 6
-        end
-      else
-        reduce_quality_of(item)
+      case item.name
+        when 'Aged Brie'
+          increase_quality_of(item)
+        when 'Backstage passes to a TAFKAL80ETC concert'
+          increase_quality_of(item)
+          if item.name == "Backstage passes to a TAFKAL80ETC concert"
+            increase_quality_of(item) if item.sell_in < 11
+            increase_quality_of(item) if item.sell_in < 6
+          end
+        else
+          reduce_quality_of(item)
       end
 
       if item.name == "Aged Brie"
