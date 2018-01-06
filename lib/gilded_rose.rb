@@ -38,6 +38,8 @@ class GildedRose
     end
   end
 
+  private
+
   def expired?(item)
     item.sell_in < 0
   end
