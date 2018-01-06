@@ -42,13 +42,13 @@ class GildedRose
     return if item.name == "Sulfuras, Hand of Ragnaros"
     return if item.quality == 0
 
-    item.quality = item.quality - 1
+    item.quality -= 1
   end
 
   def increase_quality_of(item)
     return if item.quality == 50
 
-    item.quality = item.quality + 1
+    item.quality += 1
   end
 end
 
