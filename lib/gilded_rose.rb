@@ -9,7 +9,7 @@ class GildedRose
       next if item.name == "Sulfuras, Hand of Ragnaros"
       item.sell_in = item.sell_in - 1
 
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+      if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
         reduce_quality_of(item)
       else
         increase_quality_of(item)
