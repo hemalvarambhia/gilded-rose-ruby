@@ -7,17 +7,19 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       next if item.name == "Sulfuras, Hand of Ragnaros"
-      item.sell_in -= 1
       case item.name
         when 'Aged Brie'
+          item.sell_in -= 1
           increase_quality_of(item)
           increase_quality_of(item) if expired?(item)
         when 'Backstage passes to a TAFKAL80ETC concert'
+          item.sell_in -= 1
           increase_quality_of(item)
           increase_quality_of(item) if item.sell_in < 11
           increase_quality_of(item) if item.sell_in < 6
           item.quality = 0 if expired?(item)
         else
+          item.sell_in -= 1
           reduce_quality_of(item)
           reduce_quality_of(item) if expired?(item)
       end
