@@ -11,20 +11,14 @@ class GildedRose
       case item.name
         when 'Aged Brie'
           increase_quality_of(item)
+          increase_quality_of(item) if expired?(item)
         when 'Backstage passes to a TAFKAL80ETC concert'
           increase_quality_of(item)
           increase_quality_of(item) if item.sell_in < 11
           increase_quality_of(item) if item.sell_in < 6
-        else
-          reduce_quality_of(item)
-      end
-
-      case item.name
-        when 'Aged Brie'
-          increase_quality_of(item) if expired?(item)
-        when 'Backstage passes to a TAFKAL80ETC concert'
           item.quality = 0 if expired?(item)
         else
+          reduce_quality_of(item)
           reduce_quality_of(item) if expired?(item)
       end
     end
