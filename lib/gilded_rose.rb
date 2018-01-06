@@ -8,7 +8,7 @@ class GildedRose
     @items.each do |item|
       case item.name
         when 'Sulfuras, Hand of Ragnaros'
-          update_sulfuras(item)
+          Sulfuras.new(item).update
         when 'Aged Brie'
           update_aged_brie(item)
         when 'Backstage passes to a TAFKAL80ETC concert'
@@ -20,10 +20,6 @@ class GildedRose
   end
 
   private
-
-  def update_sulfuras(item)
-    # Do nothing
-  end
 
   def update_normal_item(item)
     item.sell_in -= 1
@@ -59,6 +55,16 @@ class GildedRose
     return if item.quality == 50
 
     item.quality += 1
+  end
+end
+
+class Sulfuras
+  def initialize(item)
+
+  end
+  
+  def update
+    # Do nothing
   end
 end
 
