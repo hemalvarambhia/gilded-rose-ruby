@@ -13,10 +13,8 @@ class GildedRose
           increase_quality_of(item)
         when 'Backstage passes to a TAFKAL80ETC concert'
           increase_quality_of(item)
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            increase_quality_of(item) if item.sell_in < 11
-            increase_quality_of(item) if item.sell_in < 6
-          end
+          increase_quality_of(item) if item.sell_in < 11
+          increase_quality_of(item) if item.sell_in < 6
         else
           reduce_quality_of(item)
       end
