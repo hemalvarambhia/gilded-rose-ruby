@@ -7,7 +7,7 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       next if item.name == "Sulfuras, Hand of Ragnaros"
-      item.sell_in = item.sell_in - 1
+      item.sell_in -= 1
       case item.name
         when 'Aged Brie'
           increase_quality_of(item)
