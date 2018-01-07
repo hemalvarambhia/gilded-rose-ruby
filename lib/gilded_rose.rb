@@ -10,7 +10,7 @@ class GildedRose
         when 'Sulfuras, Hand of Ragnaros'
           Sulfuras.new(item).update
         when 'Aged Brie'
-          update_aged_brie(item)
+          AgedBrie.new(item).update
         when 'Backstage passes to a TAFKAL80ETC concert'
           updated_backstage_pass(item)
         else
@@ -33,12 +33,6 @@ class GildedRose
     increase_quality_of(item) if item.sell_in < 11
     increase_quality_of(item) if item.sell_in < 6
     item.quality = 0 if expired?(item)
-  end
-
-  def update_aged_brie(item)
-    item.sell_in -= 1
-    increase_quality_of(item)
-    increase_quality_of(item) if expired?(item)
   end
 
   def expired?(item)
@@ -65,6 +59,30 @@ class Sulfuras
   
   def update
     # Do nothing
+  end
+end
+
+class AgedBrie
+  attr_reader :item
+  
+  def initialize(item)
+    @item = item
+  end
+
+  def update
+    item.sell_in -= 1
+    increase_quality
+    increase_quality if expired?
+  end
+
+  def expired?
+    item.sell_in < 0
+  end
+
+  def increase_quality
+    return if item.quality == 50
+
+    item.quality += 1
   end
 end
 
