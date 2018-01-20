@@ -37,7 +37,16 @@ class ConjuredItem
 
   def update
     item.sell_in -=1
+    reduce_quality
+    reduce_quality if expired?
+  end
+
+  def reduce_quality
     item.quality -=2 unless item.quality.zero?
+  end
+
+  def expired?
+    item.sell_in < 0
   end
 end
 
