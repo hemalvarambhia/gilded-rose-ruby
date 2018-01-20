@@ -66,7 +66,7 @@ class NormalItem
   private
 
   def expired?
-    @item.sell_in < 0
+    item.sell_in < 0
   end
 
   def reduce_quality
