@@ -229,6 +229,10 @@ describe GildedRose do
       let(:conjured_item) { a_conjured_item(sell_in: 30) }
       let(:gilded_rose) { GildedRose.new([conjured_item]) }
       subject(:update_quality) { gilded_rose.update_quality }
+
+      it 'reduces the number of days left sell by 1' do
+        expect { update_quality }.to change { conjured_item.sell_in }.by -1
+      end
       
       it 'decays twice as fast as normal items' do
         expect { update_quality }.to change { conjured_item.quality }.by -2
