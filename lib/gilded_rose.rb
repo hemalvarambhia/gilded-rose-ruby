@@ -18,11 +18,25 @@ class GildedRose
         the_item = AgedBrie.new(item)
       when 'Backstage passes to a TAFKAL80ETC concert'
         the_item = BackstagePasses.new(item)
+      when 'Conjured'
+        the_item = ConjuredItem.new(item)
       else
         the_item = NormalItem.new(item)
     end
 
     the_item.update
+  end
+end
+
+class ConjuredItem
+  attr_reader :item
+  
+  def initialize(item)
+    @item = item
+  end
+
+  def update
+    item.quality -=2
   end
 end
 
