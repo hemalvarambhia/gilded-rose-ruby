@@ -5,18 +5,24 @@ class GildedRose
   end
 
   def update_quality
-    @items.each do |item|
-      case item.name
-        when 'Sulfuras, Hand of Ragnaros'
-          Sulfuras.new(item).update
-        when 'Aged Brie'
-          AgedBrie.new(item).update
-        when 'Backstage passes to a TAFKAL80ETC concert'
-          BackstagePasses.new(item).update
-        else
-          NormalItem.new(item).update
-      end
+    @items.each { |item| update_quality_of(item) }
+  end
+
+  private
+
+  def update_quality_of(item)
+    case item.name
+      when 'Sulfuras, Hand of Ragnaros'
+        the_item = Sulfuras.new(item)
+      when 'Aged Brie'
+        the_item = AgedBrie.new(item)
+      when 'Backstage passes to a TAFKAL80ETC concert'
+        the_item = BackstagePasses.new(item)
+      else
+        the_item = NormalItem.new(item)
     end
+
+    the_item.update
   end
 end
 
