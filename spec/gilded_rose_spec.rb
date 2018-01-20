@@ -226,11 +226,18 @@ describe GildedRose do
 
   describe 'Conjured items' do
     context 'when it is not passed its sell-by date' do
-      let(:conjured_item) { Item.new('Conjured', 30, 25) }
-      subject(:update_quality) { GildedRose.new([conjured_item]).update_quality }
+      let(:conjured_item) { a_conjured_item(sell_in: 30) }
+      let(:gilded_rose) { GildedRose.new([conjured_item]) }
+      subject(:update_quality) { gilded_rose.update_quality }
       
       it 'decays twice as fast as normal items' do
         expect { update_quality }.to change { conjured_item.quality }.by -2
+      end
+
+      private
+      
+      def a_conjured_item(sell_in: 30, quality: 25)
+        Item.new('Conjured', sell_in, quality)
       end
     end
   end
