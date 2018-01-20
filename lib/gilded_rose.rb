@@ -37,7 +37,7 @@ class ConjuredItem
 
   def update
     item.sell_in -=1
-    item.quality -=2
+    item.quality -=2 unless item.quality.zero?
   end
 end
 

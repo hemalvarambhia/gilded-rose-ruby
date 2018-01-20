@@ -238,6 +238,14 @@ describe GildedRose do
         expect { update_quality }.to change { conjured_item.quality }.by -2
       end
 
+      context 'given it already has a quality of 0' do
+        let(:conjured_item) { a_conjured_item(quality: 0) }
+        
+        it 'does not decrease in quality any further' do
+          expect { update_quality }.not_to change { conjured_item.quality }
+        end
+      end
+
       private
       
       def a_conjured_item(sell_in: 30, quality: 25)
