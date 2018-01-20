@@ -14,18 +14,26 @@ class GildedRose
         when 'Backstage passes to a TAFKAL80ETC concert'
           BackstagePasses.new(item).update
         else
-          update_normal_item(item)
+          NormalItem.new(item).update
       end
     end
   end
+end
 
-  private
+class NormalItem
+  attr_reader :item
+  
+  def initialize(item)
+    @item = item
+  end
 
-  def update_normal_item(item)
+  def update
     item.sell_in -= 1
     reduce_quality_of(item)
     reduce_quality_of(item) if expired?(item)
   end
+
+  private
 
   def expired?(item)
     item.sell_in < 0
