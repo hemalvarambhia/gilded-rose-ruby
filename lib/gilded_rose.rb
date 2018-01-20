@@ -50,17 +50,17 @@ class NormalItem
 
   def update
     item.sell_in -= 1
-    reduce_quality_of(item)
-    reduce_quality_of(item) if expired?(item)
+    reduce_quality
+    reduce_quality if expired?
   end
 
   private
 
-  def expired?(item)
-    item.sell_in < 0
+  def expired?
+    @item.sell_in < 0
   end
 
-  def reduce_quality_of(item)
+  def reduce_quality
     return if item.quality == 0
 
     item.quality -= 1
