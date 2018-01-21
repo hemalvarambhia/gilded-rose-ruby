@@ -254,6 +254,14 @@ describe GildedRose do
       it 'decays twices as fast as the normal item' do
         expect { update_quality }.to change { conjured_item.quality }.by -4
       end
+
+      context 'given it already has a quality of 0' do
+        let(:conjured_item) { a_conjured_item(sell_in: 0, quality: 0) }
+        
+        it 'does not decrease in quality any further' do
+          expect { update_quality }.not_to change { conjured_item.quality }
+        end
+      end
     end
 
     private
