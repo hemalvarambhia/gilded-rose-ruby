@@ -11,17 +11,18 @@ class GildedRose
   private
 
   def update_quality_of(item)
-    case item.name
-      when 'Sulfuras, Hand of Ragnaros'
-        the_item = Sulfuras.new(item)
-      when 'Aged Brie'
-        the_item = AgedBrie.new(item)
-      when 'Backstage passes to a TAFKAL80ETC concert'
-        the_item = BackstagePasses.new(item)
-      when 'Conjured'
-        the_item = ConjuredItem.new(item)
-      else
-        the_item = NormalItem.new(item)
+    the_item =
+      case item.name
+        when 'Sulfuras, Hand of Ragnaros'
+          Sulfuras.new(item)
+        when 'Aged Brie'
+          AgedBrie.new(item)
+        when 'Backstage passes to a TAFKAL80ETC concert'
+          BackstagePasses.new(item)
+        when 'Conjured'
+          ConjuredItem.new(item)
+        else
+          NormalItem.new(item)
     end
 
     the_item.update
