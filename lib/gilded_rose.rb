@@ -71,7 +71,7 @@ class NormalItem
   end
 
   def reduce_quality
-    return if item.quality == 0
+    return if item.quality.zero?
 
     item.quality -= 1
   end
