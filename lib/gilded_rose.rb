@@ -1,5 +1,4 @@
 class GildedRose
-
   def initialize(items)
     @items = items
   end
@@ -11,21 +10,19 @@ class GildedRose
   private
 
   def update_quality_of(item)
-    the_item =
-      case item.name
-        when 'Sulfuras, Hand of Ragnaros'
-          Sulfuras.new(item)
-        when 'Aged Brie'
-          AgedBrie.new(item)
-        when 'Backstage passes to a TAFKAL80ETC concert'
-          BackstagePasses.new(item)
-        when 'Conjured'
-          ConjuredItem.new(item)
-        else
-          NormalItem.new(item)
-    end
+    the_item(item).update
+  end
 
-    the_item.update
+  def the_item(item)
+    items = {
+      'Sulfuras, Hand of Ragnaros' => Sulfuras,
+      'Aged Brie' => AgedBrie,
+      'Backstage passes to a TAFKAL80ETC concert' => BackstagePasses,
+      'Conjured' => ConjuredItem
+    }
+    items.default = NormalItem
+
+    items[item.name].new(item)
   end
 end
 
