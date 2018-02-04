@@ -251,7 +251,7 @@ describe GildedRose do
     context 'when it hits its sell by date' do
       let(:conjured_item) { a_conjured_item(sell_in: 0) }
       
-      it 'decays twices as fast as the normal item' do
+      it 'decays twice as fast as the normal item' do
         expect { update_quality }.to change { conjured_item.quality }.by -4
       end
 
