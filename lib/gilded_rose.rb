@@ -68,9 +68,7 @@ class NormalItem
   private
 
   def reduce_quality
-    return if item.quality.zero?
-
-    item.quality -= 1
+    item.quality -= 1 unless item.quality.zero?
   end
 end
 
