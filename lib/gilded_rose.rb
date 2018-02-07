@@ -4,7 +4,7 @@ class GildedRose
   end
 
   def update_quality
-    @items.each { |item| the_item(item).update }
+    @items.each { |item| the_item(item).update_quality }
   end
 
   private
@@ -36,11 +36,13 @@ class ConjuredItem
     @item = item
   end
 
-  def update
+  def update_quality
     item.sell_in -=1
     reduce_quality
     reduce_quality if expired?
   end
+
+  private
 
   def reduce_quality
     item.quality -=2 unless item.quality.zero?
@@ -55,7 +57,7 @@ class NormalItem
     @item = item
   end
 
-  def update
+  def update_quality
     item.sell_in -= 1
     reduce_quality
     reduce_quality if expired?
@@ -72,8 +74,8 @@ class Sulfuras
   def initialize(item)
 
   end
-  
-  def update
+
+  def update_quality
     # Do nothing
   end
 end
@@ -86,7 +88,7 @@ class AgedBrie
     @item = item
   end
 
-  def update
+  def update_quality
     item.sell_in -= 1
     increase_quality
     increase_quality if expired?
@@ -109,7 +111,7 @@ class BackstagePasses
     @item = item
   end
 
-  def update
+  def update_quality
     item.sell_in -= 1
     increase_quality
     increase_quality if item.sell_in < 11
