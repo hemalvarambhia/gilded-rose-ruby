@@ -26,7 +26,14 @@ class GildedRose
   end
 end
 
+module GildedRoseItem
+  def expired?
+    item.sell_in < 0
+  end
+end
+
 class ConjuredItem
+  include GildedRoseItem
   attr_reader :item
   
   def initialize(item)
@@ -42,13 +49,10 @@ class ConjuredItem
   def reduce_quality
     item.quality -=2 unless item.quality.zero?
   end
-
-  def expired?
-    item.sell_in < 0
-  end
 end
 
 class NormalItem
+  include GildedRoseItem
   attr_reader :item
   
   def initialize(item)
@@ -62,10 +66,6 @@ class NormalItem
   end
 
   private
-
-  def expired?
-    item.sell_in < 0
-  end
 
   def reduce_quality
     return if item.quality.zero?
@@ -85,6 +85,7 @@ class Sulfuras
 end
 
 class AgedBrie
+  include GildedRoseItem
   attr_reader :item
   
   def initialize(item)
@@ -97,9 +98,7 @@ class AgedBrie
     increase_quality if expired?
   end
 
-  def expired?
-    item.sell_in < 0
-  end
+  private
 
   def increase_quality
     return if item.quality == 50
@@ -109,6 +108,7 @@ class AgedBrie
 end
 
 class BackstagePasses
+  include GildedRoseItem
   attr_reader :item
 
   def initialize(item)
@@ -123,9 +123,7 @@ class BackstagePasses
     item.quality = 0 if expired?
   end
 
-  def expired?
-    item.sell_in < 0
-  end
+  private
   
   def increase_quality
     return if item.quality == 50
