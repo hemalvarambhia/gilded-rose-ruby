@@ -4,14 +4,10 @@ class GildedRose
   end
 
   def update_quality
-    @items.each { |item| update_quality_of(item) }
+    @items.each { |item| the_item(item).update }
   end
 
   private
-
-  def update_quality_of(item)
-    the_item(item).update
-  end
 
   def the_item(item)
     items = {
